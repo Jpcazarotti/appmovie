@@ -8,7 +8,7 @@ void main() {
       title: "Lista de Filmes",
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black26,
+          backgroundColor: Colors.black12,
         ),
       ),
       home: const HomePage(),

@@ -68,9 +68,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Lista de Filmes"),
-        centerTitle: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 8,
+                spreadRadius: 2,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            title: const Text("Lista de Filmes"),
+            centerTitle: true,
+            backgroundColor: Colors.white54,
+            elevation: 0,
+          ),
+        ),
       ),
       drawer: const MenuDrawer(),
       body: Padding(
@@ -79,15 +96,29 @@ class _HomePageState extends State<HomePage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: buscarMovie,
-                decoration: const InputDecoration(
-                  label: Text("Buscar Filme"),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 15,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  controller: buscarMovie,
+                  decoration: const InputDecoration(
+                    label: Text("Buscar Filme"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    suffixIcon: Icon(Icons.search),
                   ),
-                  suffixIcon: Icon(Icons
-                      .search), // 'prefixIcon' -> lado esquerdo; 'suffixIcon' -> lado direito
                 ),
               ),
             ),
@@ -97,6 +128,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, index) {
                     var movie = movies[index];
                     return Card(
+                      elevation: 4,
                       child: ListTile(
                         leading: ClipRRect(
                           borderRadius: const BorderRadius.all(
@@ -104,6 +136,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Image.network(
                             movie["Images"][0],
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Image.asset(
+                                "assets/carretelFilme.avif",
+                                fit: BoxFit.cover,
+                                width: 100,
+                                height: 60,
+                              );
+                            },
                             fit: BoxFit.cover,
                             width: 100,
                             height: 60,
@@ -129,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const DetalhesPage(),
+                              builder: (context) => DetalhesPage(movie: movie),
                             ),
                           );
                         },
