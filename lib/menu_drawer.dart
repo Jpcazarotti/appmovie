@@ -12,10 +12,10 @@ class MenuDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const SizedBox(
-            height: 100,
+            height: 120,
             child: DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: Colors.black12,
               ),
               child: Align(
                 alignment: Alignment.centerLeft,

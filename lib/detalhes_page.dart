@@ -119,7 +119,15 @@ class DetalhesPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Share.share(
-                          'Confira este conteúdo incrível! \nhttps://www.youtube.com/results?search_query=${movie['Title'].toLowerCase()}',
+                          'Confira este filme, ${movie['Title']}!\n'
+                          '${movie['Plot']}\n'
+                          "Lançado: ${movie['Released']}\n"
+                          "Duração: ${movie['Runtime']}\n"
+                          "Gênero: ${movie['Genre']}\n"
+                          "Atores: ${movie['Actors']}\n"
+                          "Linguagem: ${movie['Language']}\n"
+                          "Avaliação: imdb: ${movie['imdbRating']}\n"
+                          'https://www.youtube.com/results?search_query=${movie['Title'].toLowerCase()}',
                           subject: 'Dê uma olhada nisso!');
                     },
                     style: ElevatedButton.styleFrom(
